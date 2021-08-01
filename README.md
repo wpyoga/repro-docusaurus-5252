@@ -1,4 +1,4 @@
-(Some minimal) reproduction for facebook/docusaurus#5252
+(Some minimal) reproduction for [facebook/docusaurus#5252](https://github.com/facebook/docusaurus/issues/5252)
 
 - [test-docusaurus-2.0.0-beta.4](test-docusaurus-2.0.0-beta.4)
 
@@ -52,24 +52,24 @@
 
     Yet another way, is to run `node test_self.js`. This script watches the file `docusaurus.config.js` and then repeatedly executes the above command sequence. Usually we get this output:
 
-        ```
-        [ 'blog/*.md', 'docusaurus.config.js' ]
-        2021-08-01T12:12:09.892Z change docusaurus.config.js
-        2021-08-01T12:12:10.397Z unlink docusaurus.config.js
-        ```
+    ```
+    [ 'blog/*.md', 'docusaurus.config.js' ]
+    2021-08-01T12:12:09.892Z change docusaurus.config.js
+    2021-08-01T12:12:10.397Z unlink docusaurus.config.js
+    ```
 
     But sometimes (maybe 10% of the time) we get something like this:
 
-        ```
-        [ 'blog/*.md', 'docusaurus.config.js' ]
-        2021-08-01T12:12:12.982Z unlink docusaurus.config.js
-        ```
+    ```
+    [ 'blog/*.md', 'docusaurus.config.js' ]
+    2021-08-01T12:12:12.982Z unlink docusaurus.config.js
+    ```
 
     Which means that the `change` event never appeared at all. Also, sometimes (less than 5% of the time) we get something like this:
 
-        ```
-        [ 'blog/*.md', 'docusaurus.config.js' ]
-        2021-08-01T12:15:39.524Z change docusaurus.config.js
-        2021-08-01T12:15:40.521Z change docusaurus.config.js
-        2021-08-01T12:15:42.024Z unlink docusaurus.config.js
-        ```
+    ```
+    [ 'blog/*.md', 'docusaurus.config.js' ]
+    2021-08-01T12:15:39.524Z change docusaurus.config.js
+    2021-08-01T12:15:40.521Z change docusaurus.config.js
+    2021-08-01T12:15:42.024Z unlink docusaurus.config.js
+    ```
