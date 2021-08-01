@@ -1,6 +1,6 @@
 (Some minimal) reproduction for facebook/docusaurus#5252
 
-- [docusaurus-2.0.0-beta.4](docusaurus-2.0.0-beta.4)
+- [test-docusaurus-2.0.0-beta.4](test-docusaurus-2.0.0-beta.4)
 
     This was installed using:
 
@@ -18,8 +18,15 @@
 
     This effect is not *always* reproducible. Sometimes it takes a few saves. Once the site is not rebuilt, it won't be rebuilt anymore until the development server is shut down and `yarn start` is executed again.
 
+- [docusaurus-2.0.0-beta.4-extraLogging](docusaurus-2.0.0-beta.4-extraLogging)
 
+    This is a copy of `test-docusaurus-2.0.0-beta.4`:
 
+    ```console
+    $ cp -a test-docusaurus-2.0.0-beta.4 test-docusaurus-2.0.0-beta.4-extraLogging
+    ```
+
+    Then it was modified to print out more logs onto the terminal.
 
 
 
