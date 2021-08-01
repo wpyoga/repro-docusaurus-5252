@@ -14,11 +14,15 @@
 
     - on one terminal, execute `yarn start`
 
-    - on another terminal, edit `docusaurus.config.js` using `vim` and save, twice: on the first save the site will be rebuilt, on the second save the site won't be rebuilt
+    - on another terminal, edit `title` inside `docusaurus.config.js` using `vim` and save, twice: on the first save the site will be rebuilt, on the second save the site won't be rebuilt
 
-    This effect is not *always* reproducible. Sometimes it takes a few saves. Once the site is not rebuilt, it won't be rebuilt anymore until the development server is shut down and `yarn start` is executed again.
+    This effect is not *always* reproducible with 2 saves. Sometimes it takes a few saves. Once the site is not rebuilt, it won't be rebuilt anymore until the development server is shut down and `yarn start` is executed again.
 
-- [docusaurus-2.0.0-beta.4-extraLogging](docusaurus-2.0.0-beta.4-extraLogging)
+    This effect is only reproducible using `vim`. `nano` and VS Code won't work. This is due to `vim` using an "atomic save" instead of replacing the edited file directly: [paulmillr/chokidar#35](paulmillr/chokidar#35)
+
+    Also, any element inside `docusaurus.config.js` can be used (edited) for this demonstration. It can be the theme, it can be any other element, as long as it changes the configuration. Just simply `touch`-ing the file won't work.
+
+- [test-docusaurus-2.0.0-beta.4-extraLogging](test-docusaurus-2.0.0-beta.4-extraLogging)
 
     This is a copy of `test-docusaurus-2.0.0-beta.4`:
 
@@ -27,6 +31,12 @@
     ```
 
     Then it was modified to print out more logs onto the terminal.
+
+    To reproduce the problem, use `yarn start` and `vim` the same way as reproducing with `test-docusaurus-2.0.0-beta.4`. However, in this version, you can see what's going on better: upon the first save, there is a `change` event for `docusaurus.config.js`
+
+    With this, we can see that
+
+
 
 
 
