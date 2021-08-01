@@ -44,13 +44,32 @@
 
     Sometimes, there will only be a `change` event. Just edit the file `docusaurus.config.js` again a few times, most of the time there will be an `unlink` event.
 
+- [test-minimal](test-minimal)
 
+    This is a minimal reproduction. Running `node test1.js` and then editing `docusaurus.config.js` will reproduce the problem most of the time.
 
+    One other way to reproduce the problem is by running `node test1.js` in one terminal, and then `cp docusaurus.config.js docusaurus.config.js.bak && rm docusaurus.config.js && cp docusaurus.config.js.bak docusaurus.config.js` in another terminal. The whole `cp ... && rm ... && cp ...` command sequence simulates `vim` saving a file.
 
+    Yet another way, is to run `node test_self.js`. This script watches the file `docusaurus.config.js` and then repeatedly executes the above command sequence. Usually we get this output:
 
+        ```
+        [ 'blog/*.md', 'docusaurus.config.js' ]
+        2021-08-01T12:12:09.892Z change docusaurus.config.js
+        2021-08-01T12:12:10.397Z unlink docusaurus.config.js
+        ```
 
+    But sometimes (maybe 10% of the time) we get something like this:
 
+        ```
+        [ 'blog/*.md', 'docusaurus.config.js' ]
+        2021-08-01T12:12:12.982Z unlink docusaurus.config.js
+        ```
 
+    Which means that the `change` event never appeared at all. Also, sometimes (less than 5% of the time) we get something like this:
 
-
-
+        ```
+        [ 'blog/*.md', 'docusaurus.config.js' ]
+        2021-08-01T12:15:39.524Z change docusaurus.config.js
+        2021-08-01T12:15:40.521Z change docusaurus.config.js
+        2021-08-01T12:15:42.024Z unlink docusaurus.config.js
+        ```
